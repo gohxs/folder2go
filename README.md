@@ -10,6 +10,8 @@ go get dev.hexasoftware.com/stdio/folder2go
 
 folder2go /path generated
 ```
+
+Using
 ```go
 import (
 	"mypkg/generated"
