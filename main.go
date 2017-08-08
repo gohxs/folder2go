@@ -15,7 +15,7 @@ var (
 )
 
 func main() {
-	flag.BoolVar(&flagHandler, "handler", false, "Generates http handler")
+	flag.BoolVar(&flagHandler, "handler", false, "Generates http handlerFunc")
 	flag.Parse()
 
 	if flag.NArg() < 2 {
