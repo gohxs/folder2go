@@ -47,7 +47,7 @@ func main() {
 			return err
 		}
 
-		kfname := absPath[len(absFolder):]
+		kfname := absPath[len(absFolder)+1:] // remove slash?
 
 		log.Printf("Processing: %s ", kfname)
 		fdata, err := ioutil.ReadFile(fpath)
@@ -119,7 +119,7 @@ func AssetHandleFunc(w http.ResponseWriter, r *http.Request) {
 		urlPath = strings.TrimPrefix(r.URL.String(), handlerPath)
 	}
 	if urlPath == "" { // Auto index
-		urlPath = "/index.html"
+		urlPath = "index.html"
 	}
 	data, ok := Data[urlPath]
 	if !ok {
