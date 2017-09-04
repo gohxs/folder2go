@@ -25,13 +25,23 @@ func main() {
 		return
 	}
 
-	var folder = flag.Args()[0]
+	var folder, err = filepath.Abs(flag.Args()[0])
+	if err != nil {
+		log.Println("Error on dir:", err)
+		return
+	}
 	var pkg = filepath.Base(flag.Args()[1]) // Remove trailing '/'
 	dst := pkg
 	if flag.NArg() >= 3 {
 		dst = flag.Args()[2]
 	}
 	var data = map[string]string{}
+
+	_, err = os.Stat(folder)
+	if err != nil {
+		log.Println("Error opening dir", folder, err)
+		return
+	}
 
 	filepath.Walk(folder, func(fpath string, f os.FileInfo, err error) error {
 		if f.IsDir() {
@@ -67,7 +77,7 @@ func main() {
 	targetFile := fmt.Sprintf("%s/%s.go", dst, pkg)
 
 	// Check if file exists
-	_, err := os.Stat(targetFile)
+	_, err = os.Stat(targetFile)
 	if err == nil || !os.IsNotExist(err) { // File exists
 		err := os.Rename(targetFile, targetFile+".bak") // can fail
 		if err != nil {
