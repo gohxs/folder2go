@@ -1,7 +1,6 @@
-folder2go
-===========
+# folder2go
 
-Simple app to Embed a directory into a go package, 
+Simple app to Embed a directory into a go package,
 All files would be on a `map[string][]byte` where string is the filename
 
 ### Usage:
@@ -12,8 +11,8 @@ go get github.com/gohxs/folder2go
 folder2go /path generated
 ```
 
-
 Using
+
 ```go
 import (
 	"mypkg/generated"
@@ -23,7 +22,6 @@ import (
 func main() {
 	fmt.Printf("%s",string(generated.Data["file.txt"]	))
 }
-
 ```
 
 #### Result file:
@@ -34,8 +32,8 @@ package pkg
 
 //Data exported data taken from folder .
 var Data = map[string][]byte{
-	"/README.md": []byte("\x66\x6F\x6C\x64\x65\x72\x32\x67\x6F\x0A\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x0A\x0A\x45..."}
-	"/main.go":   []byte("\x2F\x2F\x20\x47\x72\x61\x62\x73\x20\x61\x20\x66\x6F\x6C\x64\x65\x72\x20\x61\x6E\x64\x20\x67\x65..."}
+	"README.md": []byte("\x66\x6F\x6C\x64\x65\x72\x32\x67\x6F\x0A\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x3D\x0A\x0A\x45..."}
+	"main.go":   []byte("\x2F\x2F\x20\x47\x72\x61\x62\x73\x20\x61\x20\x66\x6F\x6C\x64\x65\x72\x20\x61\x6E\x64\x20\x67\x65..."}
 }
 ```
 
