@@ -90,8 +90,18 @@ func main() {
 	}
 
 	// Write golang file
-	os.MkdirAll(dst, os.FileMode(0755))
-	f, err := os.OpenFile(fmt.Sprintf("%s/%s.go", dst, pkg), os.O_CREATE|os.O_WRONLY|os.O_TRUNC, os.FileMode(0644))
+	dname, fname := filepath.Split(dst)
+	dpath, err := filepath.Abs(dname)
+	if err != nil {
+		panic(err)
+	}
+	if filepath.Ext(fname) != ".go" {
+		dpath = filepath.Join(dpath, pkg)
+		fname = pkg + ".go"
+	}
+
+	os.MkdirAll(dpath, os.FileMode(0755)) // Get file base
+	f, err := os.OpenFile(fmt.Sprintf("%s/%s", dpath, fname), os.O_CREATE|os.O_WRONLY|os.O_TRUNC, os.FileMode(0644))
 	if err != nil {
 		log.Fatal(err)
 	}
